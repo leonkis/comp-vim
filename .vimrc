@@ -17,10 +17,4 @@ vmap <D-j> gj
 vmap <D-k> gk
 nmap <C-j> gj
 nmap <C-k> gk
-"a fi
-"another
-"mor
-"wakdwa
-"wda
-
 
