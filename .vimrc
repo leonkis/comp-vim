@@ -86,3 +86,22 @@ nmap <C-k> gk
 
 " This disables auto comment insertion:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
+
+" Runtime path manipulation (pathogen):
+execute pathogen#infect()
+
+" Open nerdtree:
+nmap <F2> :NERDTreeToggle<CR>
+
+" When searching highlight found words:
+set hlsearch
+
+" Fixes UltiSnipsEdit creating directory in the wrong path:
+let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+
+" Remapped the ultisnips triggers:
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+
