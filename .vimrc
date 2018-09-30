@@ -136,3 +136,10 @@ set wrapmargin=0
 
 "Remove delays while pressing esc key:
 set timeoutlen=1000 ttimeoutlen=0
+
+"Open at last line:
+if has("autocmd")
+	au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
+	    \| exe "normal! g'\"" | endif
+endif
+
