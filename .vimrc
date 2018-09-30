@@ -24,11 +24,12 @@ Plugin 'honza/vim-snippets'
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
 
 
 " All of your Plugins must be added before the following line
@@ -65,13 +66,11 @@ set relativenumber
 
 """IMPORTANT! Perhaps this needs to be turned on:
 
-" filetype plugin on
+"filetype plugin on
 
 
 
 
-"autocmd Filetype tex setlocal textwidth=76
-"autocmd Filetype html setlocal textwidth=72
 
 "autocmd Filetype python setlocal ts=2 sts=2 sw=2
 
@@ -83,6 +82,16 @@ nmap <C-j> gj
 nmap <C-k> gk
 
 :nnoremap <Leader>mm :let &scrolloff=999-&scrolloff<CR>
+
+"This ensures double brackets when typing just one:
+inoremap {      {}<Left>
+inoremap {<CR>  {<CR>}<Esc>O
+inoremap {{     {
+inoremap {}     {}
+inoremap [			[]<Left>
+inoremap [<CR>	[<CR>]<Esc>O
+inoremap [[			[
+inoremap []			[]
 
 " This disables auto comment insertion:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -98,10 +107,32 @@ nmap <F2> :NERDTreeToggle<CR>
 set hlsearch
 
 " Fixes UltiSnipsEdit creating directory in the wrong path:
-let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips', 'UltiSnips']
+let g:UltiSnipsSnippetDirectories = ['~/.vim/bundle/vim-snippets/UltiSnips', 'UltiSnips']
 
 " Remapped the ultisnips triggers:
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+" This makes sure Vim recognized LaTeX instead of plain TeX:
+let g:tex_flavor = "latex"
+
+" Disable arrow keys:
+noremap <Up> <Nop>
+inoremap <Up> <Nop>
+noremap <Down> <Nop>
+inoremap <Down> <Nop>
+noremap <Left> <Nop>
+inoremap <Left> <Nop>
+noremap <Right> <Nop>
+inoremap <Right> <Nop>
+
+"Bind to save command:
+map <F3> :w! <CR>
+
+"Keybindings for quick Latex compilation (and translating to pdf):
+map <F4> :! pdflatex %<CR><CR> \| :! xdg-open $(echo % \| sed 's/tex$/pdf/') & disown<CR><CR>
+
+"Unforce word-wrapping:
+set textwidth=0
+set wrapmargin=0
+
+"Remove delays while pressing esc key:
+set timeoutlen=1000 ttimeoutlen=0
