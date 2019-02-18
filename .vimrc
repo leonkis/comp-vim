@@ -92,6 +92,15 @@ inoremap [			[]<Left>
 inoremap [<CR>	[<CR>]<Esc>O
 inoremap [[			[
 inoremap []			[]
+inoremap (			()<Left>
+inoremap (<CR>	(<CR>)<Esc>O
+inoremap ((			(
+inoremap ()			()
+inoremap <			<><Left>
+inoremap <<CR>	<<CR>><Esc>O
+inoremap <<			<
+inoremap <>			<>
+
 
 " This disables auto comment insertion:
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
@@ -127,9 +136,6 @@ inoremap <Right> <Nop>
 "Bind to save command:
 map <F3> :w! <CR>
 
-"Keybindings for quick Latex compilation (and translating to pdf):
-map <F4> :! pdflatex %<CR><CR> \| :! xdg-open $(echo % \| sed 's/tex$/pdf/') & disown<CR><CR>
-
 "Unforce word-wrapping:
 set textwidth=0
 set wrapmargin=0
@@ -142,4 +148,8 @@ if has("autocmd")
 	au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$")
 	    \| exe "normal! g'\"" | endif
 endif
+
+"Constantly print file path:
+set laststatus=2
+set statusline+=%F
 
